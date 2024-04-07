@@ -10,6 +10,11 @@ TagManager:
   - Bullet
   - Boar
   - BBoar
+  - DeadZone
+  - Scanner
+  - CBBoar
+  - Heart
+  - CoinBullet
   layers:
   - Default
   - TransparentFX

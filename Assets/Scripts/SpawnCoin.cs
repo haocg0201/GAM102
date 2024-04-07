@@ -21,9 +21,9 @@ public class SpawnCoin : MonoBehaviour
         if (enebleSpawn)
         {
             enebleSpawn = false;
-            int soluong = Random.Range(25, 51);// int thì không random ra 16 (do nguyên 0. => .9 còn float thì ra 16) 
+            int soluong = Random.Range(5, 21);// int thì không random ra 16 (do nguyên 0. => .9 còn float thì ra 16) 
             //
-            int coinPositionX =Mathf.RoundToInt(playerPosition.position.x + Random.Range(2f, 5f));
+            int coinPositionX =Mathf.RoundToInt(playerPosition.position.x + Random.Range(20f, 25f));
             float coinPositionY = Mathf.Sin(coinPositionX) + 1.5f;
             for (int i = 0; i < soluong; i++)
             {
@@ -37,7 +37,7 @@ public class SpawnCoin : MonoBehaviour
 
     IEnumerator WaitForSpawnCoin()
     {
-        float timer = Random.Range(3f, 5f);
+        float timer = Random.Range(5f, 10f);
         yield return new WaitForSeconds(timer);
         enebleSpawn = true;
     }

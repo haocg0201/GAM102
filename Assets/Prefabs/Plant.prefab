@@ -126,6 +126,9 @@ MonoBehaviour:
   bulletPos: {fileID: 1773453467423935982}
   bullet: {fileID: 5421502818767072556, guid: ad4fd56493758694e875f4e19d28e169, type: 3}
   shootSound: {fileID: 8300000, guid: 4186f0bb6964267408a2e049125a4ca7, type: 3}
+  playerMark:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!70 &8757744875262870464
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

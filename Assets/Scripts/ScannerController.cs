@@ -20,5 +20,10 @@ public class ScannerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+
+        if (collision.CompareTag("Boar"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }

@@ -14,24 +14,33 @@ public class PlantController : MonoBehaviour
     bool isAttack;
     AudioSource source;
     public AudioClip shootSound;
+    public LayerMask playerMark;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
-        isAttack = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         // có thể sử dụng timer += Time.deltaTime; cũng tương tự 
+
+        
         if (isAttack)
         {
-            isAttack = false;
-            animator.SetTrigger("atk");
-            StartCoroutine(AttackEneble());
-        }
+            for ( int i = 0;i <= 2; i++)
+            {
+                animator.SetTrigger("atk");              
+            }
+        }      
+    }
+
+    // FixUpdate is called once per 0.02s
+    private void FixedUpdate() 
+    {
+        RaycastDetectPlayer();
     }
 
     public void Shoot()
@@ -40,9 +49,23 @@ public class PlantController : MonoBehaviour
         source.PlayOneShot(shootSound);
     }
 
-    IEnumerator AttackEneble()
+    //IEnumerator AttackEneble()
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //}
+
+    public void RaycastDetectPlayer()
     {
-        yield return new WaitForSeconds(2.5f);
-        isAttack = true;
+        RaycastHit2D hitPlayer = Physics2D.Raycast(bulletPos.position, Vector2.left, 5f, playerMark);
+        if (hitPlayer)
+        {
+            //Debug.DrawRay(bulletPos.position, Vector2.left * hitPlayer.distance, Color.red); // hitPlayer.distance: noi cham vao tia
+            isAttack = true;
+        }
+        else
+        {
+            //Debug.DrawRay(bulletPos.position, Vector2.left * 5f, Color.green);
+            isAttack = false;
+        }
     }
 }

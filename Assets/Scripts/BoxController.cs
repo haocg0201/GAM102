@@ -34,62 +34,77 @@ public class BoxController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isFaceRight) // >> B
+        if (transform != null && boar != null)
         {
-            direction = Vector2.right;
-            if(Vector2.Distance(boar.position, posB.position) > 0.1f)
-            {
-                boar.position = Vector3.MoveTowards(boar.position,posB.position, speedForce * Time.deltaTime);
-                anim.Play("Boar_Walk");
-            }
-            else
-            {
-                timer += Time.deltaTime;
-                anim.Play("Boar_Idle");
-                if (timer > 1f)
-                {
-                    sr.flipX = false;
-                    isFaceRight = false;
-                    timer = 0;
-                }
+            if (isFaceRight) // >> B
+                    {
+                        direction = Vector2.right;
+                        if(Vector2.Distance(boar.position, posB.position) > 0.1f)
+                        {
+                            boar.position = Vector3.MoveTowards(boar.position,posB.position, speedForce * Time.deltaTime);
+                            anim.Play("Boar_Walk");
+                        }
+                        else
+                        {
+                            timer += Time.deltaTime;
+                            anim.Play("Boar_Idle");
+                            if (timer > 2f)
+                            {
+                                sr.flipX = false;
+                                isFaceRight = false;
+                                timer = 0;
+                            }
                 
-            }
-        }
-        else // << A
-        {
-            direction = Vector2.left;
-            if (Vector2.Distance(boar.position, posA.position) > 0.1f)
-            {
-                boar.position = Vector3.MoveTowards(boar.position, posA.position, speedForce * Time.deltaTime);
-                anim.Play("Boar_Walk");
+                        }
+                    }
+                    else // << A
+                    {
+                        direction = Vector2.left;
+                        if (Vector2.Distance(boar.position, posA.position) > 0.1f)
+                        {
+                            boar.position = Vector3.MoveTowards(boar.position, posA.position, speedForce * Time.deltaTime);
+                            //Vector3 targetPosition = posA.position; // Đích đến mà bạn muốn di chuyển tới
+                            //Vector3 newPosition = Vector3.MoveTowards(boar.position, targetPosition, speedForce * Time.deltaTime);
+                            //boar.position = newPosition;
+                            anim.Play("Boar_Walk");
 
-            }
-            else
-            {
-                timer += Time.deltaTime;
-                anim.Play("Boar_Idle");
-                if (timer > 1f)
-                {
-                    sr.flipX = true;
-                    isFaceRight = true;
-                    timer = 0;
-                }
+                        }
+                        else
+                        {
+                            timer += Time.deltaTime;
+                            anim.Play("Boar_Idle");
+                            if (timer > 2f)
+                            {
+                                sr.flipX = true;
+                                isFaceRight = true;
+                                timer = 0;
+                            }
                 
-            }
-        }
+                        }
+                    }
 
-        RayDetect();
+                    RayDetect();
+        }
+        
     }
 
     public void RayDetect()
     {
-        hitPlayer = Physics2D.Raycast(boar.position + Vector3.up, direction, 10f, playerLayer);
+        hitPlayer = Physics2D.Raycast(boar.position + Vector3.up, direction, 5f, playerLayer);
         if (hitPlayer) {
-            Debug.DrawRay(boar.position + Vector3.up,direction * hitPlayer.distance, Color.red);
+            //Debug.DrawRay(boar.position + Vector3.up,direction * hitPlayer.distance, Color.red);
         }
         else
         {
-            Debug.DrawRay(boar.position + Vector3.up, direction * 10f, Color.green);
+            //Debug.DrawRay(boar.position + Vector3.up, direction * 10f, Color.green);
         }
     }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Scanner"))
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 }
